@@ -8,6 +8,8 @@
 #define jogador_direita 62 // >
 #define jogador_cima 94 // ^
 #define jogador_baixo 118 // v
+#define parede 42 // *
+#define vazio 32 // ' '
 
 typedef struct sJogador{
     
@@ -24,16 +26,89 @@ typedef struct sTabuleiro{
 }Tabuleiro;
 
 /* * Movimentação do personagem */
-void movimentaF(){
+void giraEsq(Jogador **jogador){
+
+    if ((*jogador)->jogadorDirecao == jogador_direita) (*jogador)->jogadorDirecao = jogador_baixo; 
+    else
+    if ((*jogador)->jogadorDirecao == jogador_cima) (*jogador)->jogadorDirecao = jogador_direita; 
+    else
+    if ((*jogador)->jogadorDirecao == jogador_esquerda) (*jogador)->jogadorDirecao = jogador_cima; 
+    else 
+    if ((*jogador)->jogadorDirecao == jogador_baixo) (*jogador)->jogadorDirecao = jogador_esquerda; 
     
 }
 
-void movimentaE(){
+void giraDir( Jogador **jogador ){
+
+    if ((*jogador)->jogadorDirecao == jogador_direita) (*jogador)->jogadorDirecao = jogador_cima; 
+    else
+    if ((*jogador)->jogadorDirecao == jogador_cima) (*jogador)->jogadorDirecao = jogador_esquerda; 
+    else
+    if ((*jogador)->jogadorDirecao == jogador_esquerda) (*jogador)->jogadorDirecao = jogador_baixo; 
+    else 
+    if ((*jogador)->jogadorDirecao == jogador_baixo) (*jogador)->jogadorDirecao = jogador_direita; 
 
 }
 
-void movimentaD(){
+void movimentaPersonagem( Tabuleiro **tabuleiro, Jogador **jogador ){
 
+    switch ((*jogador)->jogadorDirecao){
+
+        case jogador_direita:{
+            
+            if( !((*tabuleiro)->local[(*jogador)->posicaoH][(*jogador)->posicaoV + 1] == parede 
+                || (*jogador)->posicaoV + 1 >= tam_tabuleiro) ){
+
+                    (*tabuleiro)->local[(*jogador)->posicaoH][(*jogador)->posicaoV] = vazio;
+                    (*jogador)->posicaoV += 1; 
+                    (*tabuleiro)->local[(*jogador)->posicaoH][(*jogador)->posicaoV] = player;
+
+                }
+
+            break;
+        }
+        case jogador_esquerda:{
+
+            if( !((*tabuleiro)->local[(*jogador)->posicaoH][(*jogador)->posicaoV - 1] == parede 
+                || (*jogador)->posicaoV - 1 < (tam_tabuleiro-tam_tabuleiro)) ){
+
+                    (*tabuleiro)->local[(*jogador)->posicaoH][(*jogador)->posicaoV] = vazio;
+                    (*jogador)->posicaoV -= 1; 
+                    (*tabuleiro)->local[(*jogador)->posicaoH][(*jogador)->posicaoV] = player;
+
+                }
+            
+            break;
+        }
+        case jogador_cima:{
+            
+            if( !((*tabuleiro)->local[(*jogador)->posicaoH - 1 ][(*jogador)->posicaoV] == parede 
+                || (*jogador)->posicaoH - 1 < (tam_tabuleiro-tam_tabuleiro)) ){
+
+                    (*tabuleiro)->local[(*jogador)->posicaoH][(*jogador)->posicaoV] = vazio;
+                    (*jogador)->posicaoH -= 1; 
+                    (*tabuleiro)->local[(*jogador)->posicaoH][(*jogador)->posicaoV] = player;
+
+            }
+            
+            break;
+        }
+        case jogador_baixo:{
+
+            if( !((*tabuleiro)->local[(*jogador)->posicaoH + 1 ][(*jogador)->posicaoV] == parede 
+                || (*jogador)->posicaoH + 1 >= tam_tabuleiro) ){
+
+                    (*tabuleiro)->local[(*jogador)->posicaoH][(*jogador)->posicaoV] = vazio;
+                    (*jogador)->posicaoH += 1; 
+                    (*tabuleiro)->local[(*jogador)->posicaoH][(*jogador)->posicaoV] = player;
+
+            }
+            
+            break;
+        }
+        
+    }    
+    
 }
 
 void inicializaTabuleiro(Tabuleiro **tabuleiro, Jogador **jogador){
@@ -47,7 +122,7 @@ void inicializaTabuleiro(Tabuleiro **tabuleiro, Jogador **jogador){
         }
     }
 
-    (*tabuleiro)->local[0][0] = 'P' ;
+    (*tabuleiro)->local[0][0] = player ;
     (*jogador)->jogador = player;
     (*jogador)->jogadorDirecao = jogador_direita;
     (*jogador)->posicaoV = 0;
@@ -56,6 +131,7 @@ void inicializaTabuleiro(Tabuleiro **tabuleiro, Jogador **jogador){
 }
 
 void imprimeTabuleiro(Tabuleiro *tabuleiro, Jogador *jogador){
+    system("cls");
     int i, j;
     for (i = 0; i < tam_tabuleiro; i++){
         printf("|---|---|---|---|---|---|---|---|\n");

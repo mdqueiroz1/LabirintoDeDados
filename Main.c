@@ -24,6 +24,16 @@ void menuPrincipal(){
                 imprimeTabuleiro(tabuleiro, jogador);
                 break;
             }
+            case 2:{
+                giraDir(&jogador);
+                imprimeTabuleiro(tabuleiro, jogador);
+                break;
+            }
+            case 3:{
+                movimentaPersonagem(&tabuleiro, &jogador);
+                imprimeTabuleiro(tabuleiro, jogador);
+                break;
+            }
                 
             
             case 9:{
