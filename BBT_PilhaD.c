@@ -1,17 +1,15 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-typedef struct sPrato{
+typedef struct sComandos{
 
-    char cor[20];
-    int tamanho;
-    char tipo[20];  
+    int movimento, quantidade;
 
-}Prato;
+}Comandos;
 
 typedef struct sPilha{
     
-    Prato info;
+    Comandos info;
     struct sPilha *prox;
  
 }Pilha;
@@ -41,7 +39,7 @@ int listaVazia( Pilha *ptrLista ){
 
 }
 
-void empilhar(Pilha **topo, Prato elem){
+void empilhar(Pilha **topo, Comandos elem){
 
     Pilha *novo;
 
@@ -59,11 +57,11 @@ void empilhar(Pilha **topo, Prato elem){
 
 }
 
-Prato desempilhar(Pilha **topo){
+Comandos desempilhar(Pilha **topo){
     
     if(!listaVazia(*topo)){
 
-        Prato L;
+        Comandos L;
         Pilha *aux;
         aux = *topo;
 
@@ -84,9 +82,9 @@ Prato desempilhar(Pilha **topo){
 
 void impressaoClassica(Pilha **topo){
     if(!listaVazia(*topo)){
-
+        printf("Sua solucao para esse problema foi:\n");
         while(!listaVazia(*topo)){
-            printf("Prato de cor %s possui %dcm de diametro e eh feito de %s \n", (*topo)->info.cor, (*topo)->info.tamanho, (*topo)->info.tipo);
+            printf("Movimento 1: %d\nRepetir: %dx\n", (*topo)->info.movimento, (*topo)->info.quantidade);
             desempilhar(topo);
         }
     }else{
@@ -95,9 +93,9 @@ void impressaoClassica(Pilha **topo){
 }
 
 
-void retornaTopo(Pilha *topo){
+// void retornaTopo(Pilha *topo){
 
-    if(!listaVazia(topo)) printf("Prato de cor %s possui %dcm de diametro e eh feito de %s \n", topo->info.cor, topo->info.tamanho, topo->info.tipo);
-    else printf("\nLista vazia!\n"); 
+//     if(!listaVazia(topo)) printf("Prato de cor %s possui %dcm de diametro e eh feito de %s \n", topo->info.cor, topo->info.tamanho, topo->info.tipo);
+//     else printf("\nLista vazia!\n"); 
 
-}
+// }

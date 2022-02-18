@@ -1,20 +1,22 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 
 /*Definição de constantes utilizadas no programa */
 #define tam_tabuleiro 8
 #define player 80 //P
+#define objetivo 79 //O
+#define parede 88 // X
 #define jogador_esquerda 60 // <
 #define jogador_direita 62 // >
 #define jogador_cima 94 // ^
 #define jogador_baixo 118 // v
-#define parede 42 // *
 #define vazio 32 // ' '
 
 typedef struct sJogador{
     
     char jogador, jogadorDirecao;
-    int posicaoV, posicaoH;
+    int posicaoV, posicaoH, vidas;
 
 }Jogador;
 
@@ -22,6 +24,7 @@ typedef struct sJogador{
 typedef struct sTabuleiro{
     
     char local[tam_tabuleiro][tam_tabuleiro];
+    char comandos_1[20], comandos_2[20], comandos_3[20];
 
 }Tabuleiro;
 
@@ -123,6 +126,7 @@ void inicializaTabuleiro(Tabuleiro **tabuleiro, Jogador **jogador){
     }
 
     (*tabuleiro)->local[0][0] = player ;
+    (*tabuleiro)->local[tam_tabuleiro-1][tam_tabuleiro-1] = objetivo;
     (*jogador)->jogador = player;
     (*jogador)->jogadorDirecao = jogador_direita;
     (*jogador)->posicaoV = 0;
@@ -149,13 +153,13 @@ void imprimeTabuleiro(Tabuleiro *tabuleiro, Jogador *jogador){
                 printf("Comandos:\n");
                 break;
             case 2:
-                printf("1 - \n");
+                printf("1 - Frente, Frente, Direita\n");
                 break;
             case 3:
-                printf("2 - \n");
+                printf("2 - Frente, Frente, Esquerda\n");
                 break;
             case 4:
-                printf("3 - \n");
+                printf("3 - Frente, Frente, Frente\n");
                 break;
             default:
                 printf("\n");
