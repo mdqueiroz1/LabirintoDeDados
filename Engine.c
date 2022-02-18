@@ -3,53 +3,22 @@
 #include "BBT_ListaSE.c"
 #include "Tabuleiro.c"
 
-
-/* comando 1 - frente frente vira a direita*/
-void comando_1(Tabuleiro **tabuleiro, Jogador **jogador){
-
-    movimentaPersonagem(tabuleiro, jogador);
-    delay(1);
-    imprimeTabuleiro( *tabuleiro, *jogador );
-    movimentaPersonagem( tabuleiro, jogador );
-    delay(1);
-    imprimeTabuleiro( *tabuleiro, *jogador );
-    giraDir(jogador);
-    delay(1);
-    imprimeTabuleiro( *tabuleiro, *jogador );
-
-}
-
-void comando_2(Tabuleiro **tabuleiro, Jogador **jogador){
-
-    movimentaPersonagem(tabuleiro, jogador);
-    delay(1);
-    imprimeTabuleiro( *tabuleiro, *jogador );
-    movimentaPersonagem(tabuleiro, jogador);
-    delay(1);
-    imprimeTabuleiro( *tabuleiro, *jogador );
-    giraEsq(jogador);
-    delay(1);
-    imprimeTabuleiro( *tabuleiro, *jogador );
-
-}
-
-void comando_3(Tabuleiro **tabuleiro, Jogador **jogador){
-
-    movimentaPersonagem(tabuleiro, jogador);
-    delay(1);
-    imprimeTabuleiro( *tabuleiro, *jogador );
-    movimentaPersonagem(tabuleiro, jogador);
-    delay(1);
-    imprimeTabuleiro( *tabuleiro, *jogador );
-    movimentaPersonagem(tabuleiro, jogador);
-    delay(1);
-    imprimeTabuleiro( *tabuleiro, *jogador );
-
-}
-
 int fase_1(Tabuleiro **tabuleiro, Jogador **jogador){
 
     inicializaTabuleiro(tabuleiro,jogador);
+    (*tabuleiro)->local[0][5] = parede;
+    (*tabuleiro)->local[0][6] = parede;
+    (*tabuleiro)->local[1][0] = parede;
+    (*tabuleiro)->local[1][1] = parede;
+    (*tabuleiro)->local[1][2] = parede;
+    (*tabuleiro)->local[1][6] = parede;
+    (*tabuleiro)->local[2][6] = parede;
+    (*tabuleiro)->local[3][2] = parede;
+    (*tabuleiro)->local[3][3] = parede;
+    (*tabuleiro)->local[3][4] = parede;
+    (*tabuleiro)->local[5][5] = parede;
+    (*tabuleiro)->local[6][5] = parede;
+    (*tabuleiro)->local[7][5] = parede;
 
     if ((*jogador)->posicaoH == tam_tabuleiro-1 && 
         (*jogador)->posicaoV == tam_tabuleiro-1) return 1;

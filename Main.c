@@ -45,7 +45,8 @@ void menuPrincipal(){
                 break;
             }
             case 3:{
-                comando_1(&tabuleiro, &jogador);
+                fase_1(&tabuleiro, &jogador);
+                imprimeTabuleiro(tabuleiro, jogador);
                 break;
             }
                 
