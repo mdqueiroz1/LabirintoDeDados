@@ -13,6 +13,8 @@
 #define jogador_baixo 118 // v
 #define vazio 32 // ' '
 
+
+
 typedef struct sJogador{
     
     char jogador, jogadorDirecao;
@@ -24,7 +26,7 @@ typedef struct sJogador{
 typedef struct sTabuleiro{
     
     char local[tam_tabuleiro][tam_tabuleiro];
-    char comandos_1[20], comandos_2[20], comandos_3[20];
+    char comandos[4][20];
 
 }Tabuleiro;
 
@@ -114,28 +116,74 @@ void movimentaPersonagem( Tabuleiro **tabuleiro, Jogador **jogador ){
     
 }
 
-void inicializaTabuleiro(Tabuleiro **tabuleiro, Jogador **jogador){
+void executaMovimento(Tabuleiro **tabuleiro, Jogador **jogador, char movimento){
 
-    *tabuleiro = (Tabuleiro*) malloc (sizeof(Tabuleiro));
-    *jogador = (Jogador*) malloc (sizeof (Jogador));
+    switch (movimento){
 
-    for (int i = 0; i < tam_tabuleiro; i++){
-        for (int j = 0; j < tam_tabuleiro; j++){
-            (*tabuleiro)->local[i][j] = ' ' ;
-        }
+    case 'F':
+        movimentaPersonagem(tabuleiro, jogador);
+        imprimeTabuleiro(*tabuleiro, *jogador);
+        delay(1);
+        break;
+    
+    case 'D':
+        giraDir(jogador);
+        imprimeTabuleiro(*tabuleiro, *jogador);
+        delay(1);
+        break;
+    
+    case 'E':
+        giraEsq(jogador);
+        imprimeTabuleiro(*tabuleiro, *jogador);
+        delay(1);
+        break;
     }
+    
+}
 
-    (*tabuleiro)->local[0][0] = player ;
-    (*tabuleiro)->local[tam_tabuleiro-1][tam_tabuleiro-1] = objetivo;
+void inicializaJogador(Jogador **jogador){
+
+    *jogador = (Jogador*) malloc (sizeof (Jogador));
     (*jogador)->jogador = player;
+    (*jogador)->vidas = 0;
     (*jogador)->jogadorDirecao = jogador_direita;
     (*jogador)->posicaoV = 0;
     (*jogador)->posicaoH = 0;
 
 }
 
+void inicializaTabuleiro(Tabuleiro **tabuleiro){
+
+    *tabuleiro = (Tabuleiro*) malloc (sizeof(Tabuleiro));
+    
+
+    for (int i = 0; i < tam_tabuleiro; i++){
+        for (int j = 0; j < tam_tabuleiro; j++){
+            (*tabuleiro)->local[i][j] = ' ' ;
+        }
+    }
+    
+    (*tabuleiro)->local[0][0] = player ;
+    (*tabuleiro)->local[tam_tabuleiro-1][tam_tabuleiro-1] = objetivo;
+
+    (*tabuleiro)->local[0][5] = parede;
+    (*tabuleiro)->local[0][6] = parede;
+    (*tabuleiro)->local[1][0] = parede;
+    (*tabuleiro)->local[1][1] = parede;
+    (*tabuleiro)->local[1][2] = parede;
+    (*tabuleiro)->local[1][6] = parede;
+    (*tabuleiro)->local[2][6] = parede;
+    (*tabuleiro)->local[3][2] = parede;
+    (*tabuleiro)->local[3][3] = parede;
+    (*tabuleiro)->local[3][4] = parede;
+    (*tabuleiro)->local[5][5] = parede;
+    (*tabuleiro)->local[6][5] = parede;
+    (*tabuleiro)->local[7][5] = parede;
+
+}
+
 void imprimeTabuleiro(Tabuleiro *tabuleiro, Jogador *jogador){
-    system("cls");
+    // system("cls");
     int i, j;
     for (i = 0; i < tam_tabuleiro; i++){
         printf("|---|---|---|---|---|---|---|---|\n");
@@ -153,13 +201,17 @@ void imprimeTabuleiro(Tabuleiro *tabuleiro, Jogador *jogador){
                 printf("Comandos:\n");
                 break;
             case 2:
-                printf("1 - Frente, Frente, Direita\n");
+                printf("1 - %s\n", tabuleiro->comandos[0]);
                 break;
             case 3:
-                printf("2 - Frente, Frente, Esquerda\n");
+                printf("2 - %s\n", tabuleiro->comandos[1]);
                 break;
             case 4:
-                printf("3 - Frente, Frente, Frente\n");
+                printf("3 - %s\n", tabuleiro->comandos[2]);
+                break;
+            case 5:
+                if(tabuleiro->comandos[3] != EOF)
+                printf("4 - %s\n", tabuleiro->comandos[3]);
                 break;
             default:
                 printf("\n");

@@ -1,5 +1,7 @@
-/**
- * @authors Lucas D Queiroz, Matheus D Queiroz, Rafael C Bernardes
+/* *
+ * @author Lucas D Queiroz
+ * @author Matheus D Queiroz
+ * @author Rafael C Bernardes
  * @date 02/2022
  * Projeto final da matéria de Estrutura de Dados
  */
@@ -40,8 +42,7 @@ void menuPrincipal(){
                 break;
             }
             case 2:{
-                giraDir(&jogador);
-                imprimeTabuleiro(tabuleiro, jogador);
+                
                 break;
             }
             case 3:{
@@ -53,6 +54,7 @@ void menuPrincipal(){
             
             case 9:{
                 printf("Programa finalizado!\n");
+                break;
             }
 
             default:{

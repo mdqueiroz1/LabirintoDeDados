@@ -1,49 +1,49 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-typedef struct sComandos{
+typedef struct sComandosPilha{
 
     int movimento, quantidade;
 
-}Comandos;
+}ComandosPilha;
 
 typedef struct sPilha{
     
-    Comandos info;
+    ComandosPilha info;
     struct sPilha *prox;
  
 }Pilha;
 
-void inicializar( Pilha **ptrLista ){
+void inicializarPilha( Pilha **ptrLista ){
     
     *ptrLista = NULL;
 
 }
 
-Pilha* alocarNo(){
+Pilha *alocarNoPilha()
+{
 
     return (Pilha*) malloc ( sizeof(Pilha) );
-
 }
 
-void desalocarNo( Pilha *ptrLista ){   
+void desalocarNoPilha( Pilha *ptrLista ){   
 
     free(ptrLista);
 
 }
 
-int listaVazia( Pilha *ptrLista ){
+int pilhaVazia( Pilha *ptrLista ){
 
     if( ptrLista == NULL ) return 1;
     else return 0;
 
 }
 
-void empilhar(Pilha **topo, Comandos elem){
+void empilhar(Pilha **topo, ComandosPilha elem){
 
     Pilha *novo;
 
-    novo = alocarNo();
+    novo = alocarNoPilha();
 
     if(novo != NULL){
 
@@ -57,11 +57,11 @@ void empilhar(Pilha **topo, Comandos elem){
 
 }
 
-Comandos desempilhar(Pilha **topo){
+ComandosPilha desempilhar(Pilha **topo){
     
-    if(!listaVazia(*topo)){
+    if(!pilhaVazia(*topo)){
 
-        Comandos L;
+        ComandosPilha L;
         Pilha *aux;
         aux = *topo;
 
@@ -69,7 +69,7 @@ Comandos desempilhar(Pilha **topo){
 
         L = aux->info;
 
-        desalocarNo(aux);
+        desalocarNoPilha(aux);
 
         return L;
 
@@ -78,24 +78,44 @@ Comandos desempilhar(Pilha **topo){
         printf("Pilha vazia!\n");
     
     }
+
 }
 
-void impressaoClassica(Pilha **topo){
-    if(!listaVazia(*topo)){
+void impressaoClassicaPilha(Pilha **topo){
+    
+    if(!pilhaVazia(*topo)){
         printf("Sua solucao para esse problema foi:\n");
-        while(!listaVazia(*topo)){
+        while(!pilhaVazia(*topo)){
             printf("Movimento 1: %d\nRepetir: %dx\n", (*topo)->info.movimento, (*topo)->info.quantidade);
             desempilhar(topo);
         }
     }else{
         printf("Lista vazia!\n");
     }
+
 }
 
+void impressaoNaoClassicaPilha(Pilha *pilha){
+    
+    if(!pilhaVazia(pilha)){
+        
+        Pilha *aux;
+        aux = pilha;
 
-// void retornaTopo(Pilha *topo){
+        while (aux != NULL){
+            printf("Comando: %d executara %dx\n", aux->info.movimento, aux->info.quantidade);
+            aux = aux->prox;
+        }
+        
+    }else{
+        printf("Pilha vazia!\n");
+    }
 
-//     if(!listaVazia(topo)) printf("Prato de cor %s possui %dcm de diametro e eh feito de %s \n", topo->info.cor, topo->info.tamanho, topo->info.tipo);
-//     else printf("\nLista vazia!\n"); 
+}
 
-// }
+void retornaTopo(Pilha *topo){
+
+    if(!pilhaVazia(topo)) printf("Comando: %d executara %dx\n", topo->info.movimento, topo->info.quantidade);
+    else printf("\nLista vazia!\n"); 
+
+}
