@@ -1,9 +1,9 @@
 /* *
+ * Projeto final da matéria de Estrutura de Dados
  * @author Lucas D Queiroz
  * @author Matheus D Queiroz
  * @author Rafael C Bernardes
  * @date 02/2022
- * Projeto final da matéria de Estrutura de Dados
  */
 
 #include <stdio.h>
@@ -38,6 +38,7 @@ void menuPrincipal(){
 
         switch (opcMenu){
             case 1:{
+                system("cls");
                 executa(&tabuleiro, &jogador);
                 break;
             }
