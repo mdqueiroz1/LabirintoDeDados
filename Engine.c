@@ -1,8 +1,17 @@
 #include "BBT_FilaD.c"
 #include "BBT_PilhaD.c"
-#include "BBT_ListaSE.c"
 #include "Tabuleiro.c"
 
+/*
+* Função criada para dar pausas durante a execução do programa
+*/
+void delay(int numSegundos){
+
+    int tempo = 500 * numSegundos;
+    clock_t inicio = clock();
+    while (clock() < inicio + tempo);
+
+}
 
 int fase_1(Tabuleiro **tabuleiro, Jogador **jogador){
 
@@ -31,7 +40,7 @@ int fase_1(Tabuleiro **tabuleiro, Jogador **jogador){
         
         
         do{
-            printf("Quantas vezes ira utilizar o %d comando?\n", aux.movimento);
+            printf("Quantas vezes ira utilizar o %do comando?\n", aux.movimento);
             scanf("%d", &aux.quantidade);
             if(aux.quantidade < 1) printf("Quantidade invalida, tente novamente\n");
         } while (aux.quantidade < 1);
@@ -88,7 +97,7 @@ int fase_2(Tabuleiro **tabuleiro, Jogador **jogador){
         scanf("%d", &aux.movimento);
         if( aux.movimento == -1 ) break;
         
-        printf("Quantas vezes ira utilizar o %d comando?\n", aux.movimento);
+        printf("Quantas vezes ira utilizar o %do comando?\n", aux.movimento);
         scanf("%d", &aux.quantidade);
         
         empilhar(&ptrPilha, aux);
@@ -142,7 +151,7 @@ int fase_3(Tabuleiro **tabuleiro, Jogador **jogador){
         scanf("%d", &aux.movimento);
         if( aux.movimento == -1 ) break;
         
-        printf("Quantas vezes ira utilizar o %d comando?\n", aux.movimento);
+        printf("Quantas vezes ira utilizar o %do comando?\n", aux.movimento);
         scanf("%d", &aux.quantidade);
         
         enfileirar(ptrFila, aux);
@@ -189,7 +198,7 @@ int fase_3(Tabuleiro **tabuleiro, Jogador **jogador){
                 scanf("%d", &aux.movimento);
                 if( aux.movimento == -1 ) break;
                     
-                printf("Quantas vezes ira utilizar o %d comando?\n", aux.movimento);
+                printf("Quantas vezes ira utilizar o %do comando?\n", aux.movimento);
                 scanf("%d", &aux.quantidade);
                     
                 empilhar(&ptrPilha, aux);
@@ -283,13 +292,3 @@ void executa(Tabuleiro **tabuleiro, Jogador **jogador){
 
 }
 
-/*
-* Função criada para dar pausas durante a execução do programa
-*/
-void delay(int numSegundos){
-
-    int tempo = 500 * numSegundos;
-    clock_t inicio = clock();
-    while (clock() < inicio + tempo);
-
-}

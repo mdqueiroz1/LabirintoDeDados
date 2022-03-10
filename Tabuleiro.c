@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <time.h>
 
 /*Definição de constantes utilizadas no programa */
@@ -12,7 +13,6 @@
 #define jogador_cima 94 // ^
 #define jogador_baixo 118 // v
 #define vazio 32 // ' '
-
 
 
 typedef struct sJogador{
@@ -183,7 +183,7 @@ void inicializaTabuleiro(Tabuleiro **tabuleiro){
 }
 
 void imprimeTabuleiro(Tabuleiro *tabuleiro, Jogador *jogador){
-    // system("cls");
+
     int i, j;
     for (i = 0; i < tam_tabuleiro; i++){
         printf("|---|---|---|---|---|---|---|---|\n");
@@ -210,7 +210,7 @@ void imprimeTabuleiro(Tabuleiro *tabuleiro, Jogador *jogador){
                 printf("3 - %s\n", tabuleiro->comandos[2]);
                 break;
             case 5:
-                if(tabuleiro->comandos[3] != EOF)
+                if(tabuleiro->comandos[3] != '/0')
                 printf("4 - %s\n", tabuleiro->comandos[3]);
                 break;
             case 6:

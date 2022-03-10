@@ -8,6 +8,7 @@
 
 #include <stdio.h>
 #include "Engine.c"
+#include "Instrucoes.c"
 
 void menuPrincipal(){
 
@@ -43,12 +44,20 @@ void menuPrincipal(){
                 break;
             }
             case 2:{
-                
+                imprimeInstrucoes();
                 break;
             }
             case 3:{
-                fase_1(&tabuleiro, &jogador);
-                imprimeTabuleiro(tabuleiro, jogador);
+                system("cls");
+                printf(" ---Desenvolvedores---\n");
+                printf("|  Lucas D Queiroz    |\n");
+                printf("|  Matheus D Queiroz  |\n");
+                printf("|  Rafael C Bernardes | \n");
+                printf(" ---------------------\n");
+                printf("Aperte enter para retornar\n");
+                fflush(stdin);
+                getc(stdin);
+                fflush(stdin);
                 break;
             }
                 

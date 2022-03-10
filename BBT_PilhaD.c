@@ -78,7 +78,7 @@ ComandosPilha desempilhar(Pilha **topo){
         printf("Pilha vazia!\n");
     
     }
-
+    
 }
 
 void impressaoClassicaPilha(Pilha **topo){
