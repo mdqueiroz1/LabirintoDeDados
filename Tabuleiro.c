@@ -30,6 +30,17 @@ typedef struct sTabuleiro{
 
 }Tabuleiro;
 
+/*
+* Função criada para dar pausas durante a execução do programa
+*/
+void delay(int numSegundos){
+
+    int tempo = 500 * numSegundos;
+    clock_t inicio = clock();
+    while (clock() < inicio + tempo);
+
+}
+
 /* * Movimentação do personagem */
 void giraEsq(Jogador **jogador){
 
@@ -185,6 +196,7 @@ void inicializaTabuleiro(Tabuleiro **tabuleiro){
 void imprimeTabuleiro(Tabuleiro *tabuleiro, Jogador *jogador){
 
     int i, j;
+    system ("cls");
     for (i = 0; i < tam_tabuleiro; i++){
         printf("|---|---|---|---|---|---|---|---|\n");
         for (j = 0; j < tam_tabuleiro; j++){

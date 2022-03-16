@@ -2,16 +2,7 @@
 #include "BBT_PilhaD.c"
 #include "Tabuleiro.c"
 
-/*
-* Função criada para dar pausas durante a execução do programa
-*/
-void delay(int numSegundos){
 
-    int tempo = 500 * numSegundos;
-    clock_t inicio = clock();
-    while (clock() < inicio + tempo);
-
-}
 
 int fase_1(Tabuleiro **tabuleiro, Jogador **jogador){
 
@@ -27,6 +18,7 @@ int fase_1(Tabuleiro **tabuleiro, Jogador **jogador){
     strcpy((*tabuleiro)->comandos[0], "F, F, F");
     strcpy((*tabuleiro)->comandos[1], "F, F, D");
     strcpy((*tabuleiro)->comandos[2], "F, F, E");
+    strcpy((*tabuleiro)->comandos[3], "D, D");
     imprimeTabuleiro(*tabuleiro, *jogador);
 
     printf("Informe suas jogadas para a fase 1, para finalizar insira -1 no comando a ser utilizado.\n");
@@ -86,8 +78,9 @@ int fase_2(Tabuleiro **tabuleiro, Jogador **jogador){
     inicializaTabuleiro( tabuleiro );
     
     strcpy((*tabuleiro)->comandos[0], "F, F, F");
-    strcpy((*tabuleiro)->comandos[1], "F, F, D");
-    strcpy((*tabuleiro)->comandos[2], "F, F, E");
+    strcpy((*tabuleiro)->comandos[1], "D, F");
+    strcpy((*tabuleiro)->comandos[2], "E, F");
+    strcpy((*tabuleiro)->comandos[3], "D, D");
     imprimeTabuleiro(*tabuleiro, *jogador);
     
     printf("Informe suas jogadas para a fase 2, para finalizar insira -1 no comando a ser utilizado.\n");
@@ -139,9 +132,10 @@ int fase_3(Tabuleiro **tabuleiro, Jogador **jogador){
     inicializaFila(ptrFila); 
     inicializaTabuleiro( tabuleiro );
     
-    strcpy((*tabuleiro)->comandos[0], "F, F, F");
-    strcpy((*tabuleiro)->comandos[1], "F, F, D");
-    strcpy((*tabuleiro)->comandos[2], "F, F, E");
+    strcpy((*tabuleiro)->comandos[0], "F, F");
+    strcpy((*tabuleiro)->comandos[1], "D, F, F");
+    strcpy((*tabuleiro)->comandos[2], "E, F, E");
+    strcpy((*tabuleiro)->comandos[3], "E, E");
     imprimeTabuleiro(*tabuleiro, *jogador);
 
     printf("Informe suas jogadas para a fase 3.1 (ida), para finalizar insira -1 no comando a ser utilizado.\n");
