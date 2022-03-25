@@ -183,6 +183,7 @@ int fase_3(Tabuleiro **tabuleiro, Jogador **jogador){
             strcpy((*tabuleiro)->comandos[0], "F, F, F");
             strcpy((*tabuleiro)->comandos[1], "F, F, D");
             strcpy((*tabuleiro)->comandos[2], "F, F, E");
+            strcpy((*tabuleiro)->comandos[3], " ");
             imprimeTabuleiro(*tabuleiro, *jogador);
                 
             printf("Informe suas jogadas para a fase 3.2 (volta), para finalizar insira -1 no comando a ser utilizado.\n");
